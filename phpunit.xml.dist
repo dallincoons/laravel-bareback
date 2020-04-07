@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!--
+For more info on directives, see:
+https://phpunit.de/manual/current/en/phpunit-book.html#appendixes.configuration
+
+Note: the backupGlobals and backupStaticAttributes were set to false because PHPUnit uses serialization for backing-up,
+and Laravel was throwing this error if those two settings were set to true: "Serialization of 'Closure' is not allowed"
+-->
+<phpunit
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xsi:noNamespaceSchemaLocation='https://schema.phpunit.de/7.1/phpunit.xsd'
+        extensionsDirectory='tests/extensions'
+        bootstrap='vendor/autoload.php'
+        backupGlobals='false'
+        backupStaticAttributes='false'
+        verbose='true'
+        colors='true'
+        stopOnError='true'
+        stopOnFailure='true'
+        stopOnIncomplete='false'
+        stopOnSkipped='false'
+        stopOnRisky='false'
+        processIsolation="false"
+        beStrictAboutTestsThatDoNotTestAnything='true'
+        beStrictAboutOutputDuringTests='true'>
+
+    <!-- Defines the test suites. -->
+    <testsuites>
+        <!-- Run a test suite of the PHP app/code. -->
+        <testsuite name='Bareback Test Suite'>
+            <directory suffix='Test.php' phpVersionOperator='>='>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <!--
+    Defines code coverage. See more info:
+    https://phpunit.de/manual/current/en/phpunit-book.html#code-coverage-analysis
+    -->
+    <filter>
+        <whitelist>
+            <directory suffix='.php'>app</directory>
+        </whitelist>
+    </filter>
+
+
+    <groups>
+        <exclude>
+            <group>commands</group>
+            <group>queries</group>
+        </exclude>
+    </groups>
+
+    <php>
+        <env name='APP_ENV' value='testing' />
+        <env name='DB_CONNECTION' value='testing' />
+    </php>
+
+</phpunit>
