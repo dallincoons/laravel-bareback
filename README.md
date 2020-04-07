@@ -6,7 +6,7 @@ Bareback is a Laravel package that makes it easy to selectively choose which tes
 
 ### Why would I want to run tests without the framework?
 
-Running tests without loading the Laravel framework is much faster, typically anywhere from 50% to 70% faster.
+Running tests without loading the Laravel framework is much faster, typically anywhere from 50% to 70%.
 
 It's often a good idea to try and implement core business logic with as little dependencies as possible. However, creating a whole 
 application with no framework dependencies isn't practical or pragmatic. This package allows you to switch off the framework
@@ -15,7 +15,7 @@ when you're able to get away with it, and switch it on when it's convenient to d
 ## Installation
 
 ```
-composer require "spacegrass/bareback=0.1"
+composer require "spacegrass/bareback"
 ```
 
 ## Usage
