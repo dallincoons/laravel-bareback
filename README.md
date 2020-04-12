@@ -7,10 +7,9 @@ Bareback is a Laravel package that makes it easy to selectively choose which tes
 ### Why would I want to run tests without the framework?
 
 Running tests without loading the Laravel framework is much faster, typically anywhere from 50% to 70%.
-
-It's often a good idea to try and implement core business logic with as little dependencies as possible. However, creating a whole 
-application with no framework dependencies isn't practical or pragmatic. This package allows you to switch off the framework
-when you're able to get away with it, and switch it on when it's convenient to do so.
+It's often a good idea to try and implement core business logic with as little dependencies as possible. However, creating an entire test suite 
+for an application with no with no framework dependencies isn't practical or pragmatic. This package allows you to switch off the framework
+when testing core business logic in "unit" tests, and switch it on when running end to end or "integration" tests.
 
 ## Installation
 
@@ -63,3 +62,42 @@ class FastTests extends TestCase
     }
 }
 ```
+
+You can add set up specifically for when the framework is loaded or not loaded by adding the `noFrameworkSetup` and `frameworkSetup` methods to 
+your test case.
+
+```
+ class SometimesRunningWithFrameworkTestCase {
+    public function noFrameworkSetup() 
+    {
+        //register fake repositories or mock something out, for example
+    }
+    
+    public function frameworkSetup()
+    {
+        //perhaps add something specific to your database migrations or anything else
+        //the is dependent on the framework
+    }
+```
+
+If you wish to run all your tests without the framework by default, and force an 'opt-in' approach when running tests with the framework,
+simply add the `withFramework` property:
+
+```
+class RunTestsWithoutFrameworkByDefaultTestCase {
+    protected $withFramework = false;
+    
+    public function test_runs_with_out_framework()
+    {
+    
+    }
+    
+    /**
+    * @withFramework
+    */
+    public function test_requires_opt_in_to_use_framework
+    {
+        
+    }
+}
+``
