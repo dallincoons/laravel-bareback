@@ -47,7 +47,6 @@ will load the framework.
 */
 class FastTests extends TestCase 
 {
-    
     public function test_something_without_framework_by_default()
     {
     
@@ -68,6 +67,7 @@ your test case.
 
 ```
  class SometimesRunningWithFrameworkTestCase {
+ 
     public function noFrameworkSetup() 
     {
         //register fake repositories or mock something out, for example
@@ -85,6 +85,7 @@ simply add the `withFramework` property:
 
 ```
 class RunTestsWithoutFrameworkByDefaultTestCase {
+
     protected $withFramework = false;
     
     public function test_runs_with_out_framework()
