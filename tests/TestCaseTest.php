@@ -8,6 +8,9 @@ class TestCaseTest extends \Spacegrass\Bareback\TestCase
 {
     use CreatesApplication;
 
+    protected $noFrameworkSetupRan = false;
+    protected $frameworkSetUpRan = false;
+
     /**
  * @withoutFramework
  *
@@ -16,6 +19,7 @@ class TestCaseTest extends \Spacegrass\Bareback\TestCase
     public function framework_is_not_loaded_when_specified_by_annotation()
     {
         $this->assertNull($this->app);
+        $this->assertTrue($this->noFrameworkSetupRan);
     }
 
     /**
@@ -26,6 +30,17 @@ class TestCaseTest extends \Spacegrass\Bareback\TestCase
     public function framework_is_loaded_when_specified_by_annotation()
     {
         $this->assertNotNull($this->app);
+        $this->assertTrue($this->frameworkSetUpRan);
+    }
+
+    protected function noFrameworkSetup()
+    {
+        $this->noFrameworkSetupRan = true;
+    }
+
+    protected function frameworkSetUp()
+    {
+        $this->frameworkSetUpRan = true;
     }
 
     /**

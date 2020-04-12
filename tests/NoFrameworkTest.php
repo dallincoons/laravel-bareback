@@ -7,7 +7,7 @@ use Orchestra\Testbench\Concerns\CreatesApplication;
 /**
  * @withoutFramework
  */
-class TestCaseNoFrameworkTest extends \Spacegrass\Bareback\TestCase
+class NoFrameworkTest extends \Spacegrass\Bareback\TestCase
 {
     use CreatesApplication;
 

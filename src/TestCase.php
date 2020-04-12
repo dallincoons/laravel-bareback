@@ -6,11 +6,12 @@ use \Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
 
 abstract class TestCase extends LaravelTestCase
 {
+    protected $withFramework = true;
     protected $isUsingFramework = true;
 
     protected function setUp(): void
     {
-        if ($this->getTestFrameworkRunner()->shouldNotUseFramework()) {
+        if (!$this->withFramework || $this->getTestFrameworkRunner()->shouldNotUseFramework()) {
             $this->isUsingFramework = false;
             static::noFrameworkSetup();
             return;
