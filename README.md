@@ -13,35 +13,38 @@ when testing core business logic in "unit" tests, and switch it on when running 
 
 ## Installation
 
-```
+```bash
 composer require "spacegrass/bareback"
 ```
 
 ## Usage
 First you need to extend the base TestCase, which in turn extends the Laravel TestCase:
 
-```
-class TestCase extends \Spacegrass\Bareback\TestCase 
-{
+```php
 
+use Spacegrass\Bareback\TestCase as BaseTestCase;
+
+class TestCase extends BaseTestCase
+{
+    //
 }
 ``` 
 
 To stop the framework from loading, simply add the `@withoutFramework` annotation to your test method:
-```
+```php
 /**
 * @withoutFramework
 */
 public function test_something_quickly()
 {
-
+    //
 }
 ```
 
 or alternatively, add the annotation to the class itself, and every test method therein will not load the framework by default. 
 If you would like to turn on the framework, add the `@withFramework` annotation to any test method, and it that test method alone
 will load the framework.
-```
+```php
 /**
 * @withoutFramework
 */
@@ -49,56 +52,57 @@ class FastTests extends TestCase
 {
     public function test_something_without_framework_by_default()
     {
-    
+        //
     }
-    
+
     /**
     * @withFramework
     */
     public function test_something_with_the_framework_for_some_reason()
     {
-    
+        //
     }
-}
+}]
 ```
 
 You can add set up specifically for when the framework is loaded or not loaded by adding the `noFrameworkSetup` and `frameworkSetup` methods to 
 your test case.
 
-```
- class SometimesRunningWithFrameworkTestCase {
- 
-    public function noFrameworkSetup() 
-    {
-        //register fake repositories or mock something out, for example
-    }
-    
-    public function frameworkSetup()
-    {
-        //perhaps add something specific to your database migrations or anything else
-        //the is dependent on the framework
+```php
+class SometimesRunningWithFrameworkTestCase extends TestCase
+{
+   public function noFrameworkSetup() 
+   {
+       // register fake repositories or mock something out, for example
+   }
+   
+   public function frameworkSetup()
+   {
+       // perhaps add something specific to your database migrations or anything else
+       // the is dependent on the framework
     }
 ```
 
 If you wish to run all your tests without the framework by default, and force an 'opt-in' approach when running tests with the framework,
 simply add the `withFramework` property:
 
-```
-class RunTestsWithoutFrameworkByDefaultTestCase {
+```php
+class RunTestsWithoutFrameworkByDefaultTestCase extends TestCase 
+{
 
     protected $withFramework = false;
-    
+
     public function test_runs_with_out_framework()
     {
-    
+        //
     }
-    
+
     /**
     * @withFramework
     */
     public function test_requires_opt_in_to_use_framework
     {
-        
+        //
     }
 }
 ``
